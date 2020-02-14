@@ -25,15 +25,20 @@ class App extends React.Component {
       }
     ]
   }
+  newBook(title, author, pages) {
+    const newBook = {title, author, pages}
+    this.setState({ books: [...this.state.books, newBook] })
+  }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <div clasName="container">
+          <div className="container">
             <Header />
             <Route exact path="/" render={props => (
               <React.Fragment>
+                <AddBook newBook={this.newBook.bind(this)}/>
                 <Bookshelf books={this.state.books}/>
               </React.Fragment>
             )} />
