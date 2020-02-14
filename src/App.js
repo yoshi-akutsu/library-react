@@ -11,23 +11,29 @@ import './App.css';
 class App extends React.Component {
   state = {
     books: [
-      { title: '1Q84', 
+      { id: '1',
+        title: '1Q84', 
         author: 'Haruki Murakami',
         pages: '928'
       },
-      { title: '1Q84', 
+      { id: '2',
+        title: 'Thw Windup Bird Chronicle', 
         author: 'Haruki Murakami',
-        pages: '928'
+        pages: '726'
       },
-      { title: '1Q84', 
-        author: 'Haruki Murakami',
-        pages: '928'
+      { id: '3',
+        title: 'My favortite book', 
+        author: 'My favorite author',
+        pages: '888'
       }
     ]
   }
-  newBook(title, author, pages) {
-    const newBook = {title, author, pages}
+  newBook(title, author, pages, id) {
+    const newBook = {title, author, pages, id}
     this.setState({ books: [...this.state.books, newBook] })
+  }
+  deleteBook(id) {
+    this.setState({ books: this.state.books.filter((book) => book.id !== id) })
   }
 
   render() {
@@ -39,7 +45,7 @@ class App extends React.Component {
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <AddBook newBook={this.newBook.bind(this)}/>
-                <Bookshelf books={this.state.books}/>
+                <Bookshelf books={this.state.books} deleteBook={this.deleteBook.bind(this)}/>
               </React.Fragment>
             )} />
             <Route path="/about" component={About} />

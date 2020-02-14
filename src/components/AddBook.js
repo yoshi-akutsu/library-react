@@ -4,7 +4,8 @@ class AddBook extends React.Component {
     state = {
         title: '',
         author: '',
-        pages: ''
+        pages: '', 
+        id: '4'
     }
     onChange = (e) => {
         if (e.target.name === 'title'){
@@ -21,7 +22,8 @@ class AddBook extends React.Component {
     
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.newBook(this.state.title, this.state.author, this.state.pages);
+        this.props.newBook(this.state.title, this.state.author, this.state.pages, this.state.id);
+        this.state.id = parseInt(this.state.id, 10) + 1;
         this.setState({ title: '', author: '', pages: ''});
     }
 
